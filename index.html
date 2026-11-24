@@ -370,7 +370,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>
                 </svg>
                 <div class="px-4 py-1.5 rounded-full bg-espresso/65 backdrop-blur-sm border border-gold/35 text-ivory text-[11px] font-serif tracking-[0.22em] uppercase shadow-lg">
-                    <span id="keep-swipe-text" class="inline-block" style="transition: opacity 150ms ease-in-out;">Keep Swipe</span>
+                    <span id="keep-swipe-text" class="inline-block" style="transition: opacity 200ms ease-in-out;">Keep Swipe</span>
                 </div>
             </div>
         </div>
@@ -849,7 +849,7 @@
         }
     }
 
-    // Teks hint berganti bahasa tiap 0,5 detik: Inggris, Indonesia, Jawa, Arab
+    // Teks hint berganti bahasa tiap 0,75 detik: Inggris, Indonesia, Jawa, Arab
     const KEEP_SWIPE_TEXTS = [
         { text: 'Keep Swipe', lang: 'en', dir: 'ltr' },
         { text: 'Terus Geser', lang: 'id', dir: 'ltr' },
@@ -860,7 +860,7 @@
     let keepSwipeTextTimer = null;
     let keepSwipeTextIndex = 0;
     let keepSwipeFadeTimer = null;
-    const KEEP_SWIPE_FADE_MS = 150;
+    const KEEP_SWIPE_FADE_MS = 200;
 
     function applyKeepSwipeText(index) {
         if (!keepSwipeText) return;
@@ -886,7 +886,7 @@
                 applyKeepSwipeText(keepSwipeTextIndex);
                 keepSwipeText.style.opacity = '1';
             }, KEEP_SWIPE_FADE_MS);
-        }, 500);
+        }, 750);
     }
 
     function stopKeepSwipeTextCycle() {
