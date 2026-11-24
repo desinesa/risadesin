@@ -849,7 +849,7 @@
         }
     }
 
-    // Teks hint berganti bahasa tiap 0,75 detik: Inggris, Indonesia, Jawa, Arab
+    // Teks hint berganti bahasa tiap 1 detik: Inggris, Indonesia, Jawa, Arab
     const KEEP_SWIPE_TEXTS = [
         { text: 'Keep Swipe', lang: 'en', dir: 'ltr' },
         { text: 'Terus Geser', lang: 'id', dir: 'ltr' },
@@ -886,7 +886,7 @@
                 applyKeepSwipeText(keepSwipeTextIndex);
                 keepSwipeText.style.opacity = '1';
             }, KEEP_SWIPE_FADE_MS);
-        }, 750);
+        }, 1000);
     }
 
     function stopKeepSwipeTextCycle() {
