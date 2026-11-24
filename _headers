@@ -1,0 +1,14 @@
+/frames/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/backsound.m4a
+  Cache-Control: public, max-age=31536000, immutable
+
+/thumbnail.webp
+  Cache-Control: public, max-age=86400
+
+/style.css
+  Cache-Control: public, max-age=3600
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

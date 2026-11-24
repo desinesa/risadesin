@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>The Wedding of Risa & Desin — 29 November 2026</title>
+    <meta name="description" content="Minggu, 29 November 2026 — Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.">
+
+    <!-- Open Graph / WhatsApp Link Thumbnail Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://risadesin.info/">
+    <meta property="og:site_name" content="The Wedding of Risa & Desin">
+    <meta property="og:title" content="The Wedding of Risa & Desin">
+    <meta property="og:description" content="Kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.">
+    <meta property="og:image" content="https://risadesin.info/thumbnail.webp">
+    <meta property="og:image:secure_url" content="https://risadesin.info/thumbnail.webp">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter / Telegram Card Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Wedding of Risa & Desin">
+    <meta name="twitter:description" content="Minggu, 29 November 2026 — Ambarawa & Kendal">
+    <meta name="twitter:image" content="https://risadesin.info/thumbnail.webp">
+
+    <!-- Frame pertama animasi diminta sedini mungkin -->
+    <link rel="preload" as="image" href="frames/notext000.webp" fetchpriority="high">
+
+    <!-- Tailwind CSS (hasil build, bukan CDN) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts: Classic Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Reset & Base Styling */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            -webkit-overflow-scrolling: touch;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1F2D19;
+            color: #2D2118;
+            font-family: 'Lora', serif;
+            overflow-x: hidden;
+        }
+
+        /* Lock scroll before Cover Gate is opened */
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* Viewport sticky container.
+           Sengaja memakai 100vh (BUKAN 100dvh): di iPhone, 100dvh berubah-ubah setiap kali
+           address bar Safari muncul/hilang saat scroll, sehingga kanvas ikut berubah ukuran
+           dan gambar terlihat "bergetar". 100vh ukurannya tetap. */
+        .canvas-viewport {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #FFF6DF;
+            /* Kanvas digambar di lapisan GPU sendiri agar lebih stabil saat scroll di iOS */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        /* Hint "Keep Swipe" dinaikkan setinggi address bar Safari agar tidak tertutup.
+           (100vh - 100svh) = tinggi address bar; nilainya tetap, tidak berubah saat scroll. */
+        #keep-swipe-hint {
+            bottom: 1.75rem;
+            bottom: calc(100vh - 100svh + 1.75rem);
+        }
+
+        #sequence-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF6DF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6E8255;
+            border-radius: 9999px;
+        }
+
+        /* Shire Parchment & Wax Seal Effects */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #3D6322 0%, #5E8C38 50%, #98252E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Utama dengan Gradasi Hangat Bersaturasi & Kontras Lembut */
+        .parchment-card {
+            --card-radius: 24px;
+            position: relative;
+            background-color: #EED4A3;
+            background-image: linear-gradient(155deg, #F6E3BE 0%, #ECD09C 52%, #DFBA7B 100%);
+            border: 1.5px solid #C89E5D;
+            border-radius: var(--card-radius);
+            box-shadow: 0 6px 22px rgba(45, 33, 24, 0.08);
+            overflow: hidden;
+        }
+
+        /* Variasi ukuran kecil (kotak Countdown) dengan Gradasi Senada */
+        .parchment-card.parchment-sm {
+            --card-radius: 16px;
+            background-color: #EED4A3;
+            background-image: linear-gradient(155deg, #F6E3BE 0%, #ECD09C 55%, #DFBA7B 100%);
+            border: 1.5px solid #C89E5D;
+            box-shadow: 0 3px 10px rgba(45, 33, 24, 0.05);
+        }
+
+        /* Bingkai Dalam Garis Putus-Putus yang Lebih Tegas & Terlihat Jelas */
+        .parchment-card::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: calc(var(--card-radius) - 8px);
+            border: 1.5px dashed rgba(96, 58, 24, 0.55);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .parchment-card.parchment-sm::before {
+            inset: 5px;
+            border-radius: calc(var(--card-radius) - 5px);
+            border-width: 1.25px;
+        }
+
+        /* Sub-card Clean & Flat dengan sentuhan krem lembut (berbeda dari card dasar) */
+        .aged-subcard {
+            --subcard-radius: 16px;
+            position: relative;
+            background-color: #FCF6E8;
+            border: 1px solid #DBC092;
+            border-radius: var(--subcard-radius);
+            box-shadow: none;
+            overflow: hidden;
+        }
+
+        /* Badge Kecil Clean & Flat */
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            background-color: #EBF2E3;
+            border: 1px solid #C5D9B2;
+            color: #3D6322;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .wax-seal-btn {
+            background-color: #98252E;
+            border: 1px solid #7A1B22;
+            box-shadow: none;
+            transition: all 0.25s ease;
+        }
+        .wax-seal-btn:hover {
+            background-color: #7A1B22;
+            transform: translateY(-1px);
+        }
+        .wax-seal-btn:active {
+            transform: translateY(0);
+        }
+
+        .gold-btn {
+            background-color: #4D772D;
+            border: 1px solid #3D6322;
+            box-shadow: none;
+            transition: all 0.25s ease;
+        }
+        .gold-btn:hover {
+            background-color: #3D6322;
+            transform: translateY(-1px);
+        }
+        .gold-btn:active {
+            transform: translateY(0);
+        }
+        /* Tombol non-aktif (abu-abu) selama gambar belum selesai dimuat */
+        .gold-btn:disabled,
+        .gold-btn:disabled:hover,
+        .gold-btn:disabled:active {
+            background-color: #A8A29E;
+            border-color: #8F8984;
+            transform: none;
+            cursor: not-allowed !important;
+            opacity: 0.85;
+        }
+
+        /* Reveal on Scroll Transitions */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle Floating Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        .animate-float {
+            animation: floatSlow 4.5s ease-in-out infinite;
+        }
+
+        /* Rotating Disc Animation for Audio Button */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-disc {
+            animation: spinSlow 9s linear infinite;
+        }
+
+        /* Animasi Gerakan Swipe Up untuk Hint Keep Swipe */
+        @keyframes swipeUpGesture {
+            0% { transform: translateY(10px); opacity: 0.3; }
+            50% { transform: translateY(-8px); opacity: 1; }
+            100% { transform: translateY(-14px); opacity: 0; }
+        }
+        .animate-swipe-up {
+            animation: swipeUpGesture 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }
+    </style>
+</head>
+<body class="locked antialiased selection:bg-gold selection:text-white">
+
+<!-- ==========================================
+     COVER GATE OVERLAY (LAYAR PEMBUKA)
+=========================================== -->
+<div id="cover-gate" class="fixed inset-0 z-50 flex justify-center bg-espresso/90 backdrop-blur-md transition-all duration-1000 ease-in-out">
+    <div class="relative w-full max-w-[440px] h-full bg-ivory overflow-hidden flex flex-col justify-between items-center text-center px-8 py-12 shadow-2xl border-x border-gold/25">
+        
+        <!-- Classical Ornamental Inner Frame -->
+        <div class="absolute inset-4 border border-gold/35 rounded-2xl pointer-events-none"></div>
+        <div class="absolute inset-5 border border-gold/15 rounded-xl pointer-events-none"></div>
+
+        <!-- Top Botanical Crest -->
+        <div class="relative z-10 flex flex-col items-center pt-4">
+            <svg class="w-14 h-14 text-gold mb-3 opacity-90" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 8C26 18 18 24 8 28C18 32 26 38 32 56C38 38 46 32 56 28C46 24 38 18 32 8Z" stroke="currentColor" stroke-width="1.2" fill="rgba(94,140,56,0.08)"/>
+                <circle cx="32" cy="30" r="3" fill="currentColor"/>
+            </svg>
+            <span class="font-serif uppercase tracking-[0.35em] text-xs text-charcoal/70">The Wedding Celebration Of</span>
+        </div>
+
+        <!-- Center Couple Title -->
+        <div class="relative z-10 my-auto py-6">
+            <div class="w-24 h-24 mx-auto mb-6 rounded-full border border-gold/40 flex items-center justify-center bg-cream/60 shadow-inner animate-float">
+                <span class="font-display italic text-3xl text-gold-dark tracking-tighter">R<span class="text-lg mx-0.5">&amp;</span>D</span>
+            </div>
+
+            <h1 class="font-display text-4xl sm:text-5xl text-espresso font-normal tracking-wide leading-tight">
+                Risa <span class="font-serif italic text-gold font-normal">&amp;</span> Desin
+            </h1>
+
+            <div class="flex items-center justify-center gap-3 my-5">
+                <span class="h-[1px] w-12 bg-gold/40"></span>
+                <span class="text-gold text-xs">✦</span>
+                <span class="h-[1px] w-12 bg-gold/40"></span>
+            </div>
+
+            <p class="font-body text-base tracking-[0.16em] uppercase text-charcoal/90 font-semibold">
+                Minggu, 29 November 2026
+            </p>
+            <p class="font-body text-xs text-charcoal/65 mt-3 max-w-xs mx-auto leading-relaxed">
+                Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.
+            </p>
+        </div>
+
+        <!-- Preloader Status & Open Invitation Button -->
+        <div class="relative z-10 w-full pb-2 flex flex-col items-center">
+            <div id="preload-container" class="w-56 mb-4 transition-opacity duration-500">
+                <div class="flex justify-between text-[11px] font-serif tracking-wider text-charcoal/70 mb-1">
+                    <span id="preload-text">Menyiapkan Animasi...</span>
+                    <span id="preload-percent">0%</span>
+                </div>
+                <div class="w-full h-1 bg-cream rounded-full overflow-hidden">
+                    <div id="preload-bar" class="h-full bg-gold transition-all duration-200 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <button id="btn-open-invitation" onclick="openInvitation()" disabled class="gold-btn text-ivory font-serif uppercase tracking-[0.22em] text-xs font-semibold px-8 py-4 rounded-full flex items-center gap-3 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <span>Buka Undangan</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================
+     FLOATING CONTROLS (AUDIO + AUTO-SCROLL)
+=========================================== -->
+<div id="floating-controls" class="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 opacity-0 pointer-events-none transition-opacity duration-700">
+    <button id="btn-autoscroll" onclick="toggleAutoScroll()" title="Auto Scroll Animasi" class="w-11 h-11 rounded-full bg-ivory/90 backdrop-blur border border-gold/40 shadow-lg flex items-center justify-center text-espresso hover:bg-gold hover:text-ivory transition-colors">
+        <svg id="icon-autoscroll-play" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-8l-7 7-7-7"/>
+        </svg>
+        <svg id="icon-autoscroll-pause" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6"/>
+        </svg>
+    </button>
+
+    <button id="btn-audio" onclick="toggleAudio()" title="Musik Latar" class="w-11 h-11 rounded-full bg-ivory/90 backdrop-blur border border-gold/40 shadow-lg flex items-center justify-center text-espresso hover:bg-gold hover:text-ivory transition-colors">
+        <svg id="icon-audio-on" class="w-5 h-5 spin-disc" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+        </svg>
+        <svg id="icon-audio-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+        </svg>
+    </button>
+</div>
+
+<audio id="bg-music" loop preload="none">
+    <source src="backsound.m4a" type="audio/mp4">
+</audio>
+
+<!-- ==========================================
+     MAIN 9:16 MOBILE-FIRST CONTAINER
+=========================================== -->
+<main class="relative z-10 w-full max-w-[440px] mx-auto bg-ivory shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-x-clip">
+
+    <!-- ==========================================
+         SECTION 1: SCROLL-DRIVEN 664-FRAME CANVAS
+         Smart Canvas 2D Source-Rect Crop agar kanan, kiri, atas, bawah penuh & proporsional
+    =========================================== -->
+    <section id="scroll-animation-track" class="relative w-full" style="height: 1150vh;">
+        <div id="canvas-sticky-box" class="canvas-viewport">
+            
+            <canvas id="sequence-canvas" width="720" height="1280"></canvas>
+
+            <!-- Hint "Keep Swipe" -->
+            <div id="keep-swipe-hint" class="absolute bottom-7 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center justify-center pointer-events-none opacity-0 translate-y-2 transition-all duration-500">
+                <svg class="w-5 h-5 text-ivory drop-shadow mb-1.5 animate-swipe-up" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>
+                </svg>
+                <div class="px-4 py-1.5 rounded-full bg-espresso/65 backdrop-blur-sm border border-gold/35 text-ivory text-[11px] font-serif tracking-[0.22em] uppercase shadow-lg">
+                    <span>Keep Swipe</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: PROFIL MEMPELAI (KERTAS LAWAS KLASIK DENGAN JAHITAN SVG REALISTIS)
+    =========================================== -->
+    <section id="first-card-section" class="relative px-5 pt-10 pb-8 bg-[#FFF6DF] overflow-hidden">
+        <!-- Decorative Vine & Blossom Border Card -->
+        <div id="first-parchment-card" class="parchment-card px-6 pt-12 pb-10 relative">
+            
+            <!-- Ornamen Tumbuhan Merambat -->
+            <div class="relative z-10 -mx-6 -mt-12 mb-1 pointer-events-none select-none">
+                <svg class="w-full h-24 sm:h-28 drop-shadow-sm" viewBox="0 0 400 115" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+                    <path d="M-10 18 C 55 48, 115 10, 200 34 C 285 10, 345 48, 410 18" stroke="#4A3728" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M-5 6 C 45 28, 95 55, 165 28 C 200 16, 235 28, 285 45 C 335 60, 375 25, 405 8" stroke="#3D6322" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M52 32 C 48 54, 65 66, 56 76 C 49 82, 42 74, 48 68" stroke="#5E8C38" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    <path d="M132 26 C 128 45, 142 56, 135 64" stroke="#5E8C38" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                    <path d="M268 26 C 272 45, 258 56, 265 64" stroke="#5E8C38" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                    <path d="M348 32 C 352 54, 335 66, 344 76 C 351 82, 358 74, 352 68" stroke="#5E8C38" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+                    <path d="M18 22 C 8 8, 28 2, 36 16 C 28 24, 18 22, 18 22 Z" fill="#3D6322"/>
+                    <path d="M32 28 C 22 42, 42 50, 48 34 C 44 26, 32 28, 32 28 Z" fill="#6E9E42"/>
+                    <path d="M68 30 C 58 14, 78 8, 86 24 C 78 32, 68 30, 68 30 Z" fill="#5E8C38"/>
+                    <path d="M84 34 C 76 50, 96 54, 102 38 C 96 30, 84 34, 84 34 Z" fill="#3D6322"/>
+                    <path d="M112 24 C 102 10, 122 4, 130 18 C 122 26, 112 24, 112 24 Z" fill="#8EB854"/>
+                    <path d="M148 25 C 140 42, 162 46, 166 28 C 158 22, 148 25, 148 25 Z" fill="#3D6322"/>
+                    <path d="M168 22 C 162 8, 180 4, 186 18 C 178 24, 168 22, 168 22 Z" fill="#5E8C38"/>
+
+                    <path d="M382 22 C 392 8, 372 2, 364 16 C 372 24, 382 22, 382 22 Z" fill="#3D6322"/>
+                    <path d="M368 28 C 378 42, 358 50, 352 34 C 356 26, 368 28, 368 28 Z" fill="#6E9E42"/>
+                    <path d="M332 30 C 342 14, 322 8, 314 24 C 322 32, 332 30, 332 30 Z" fill="#5E8C38"/>
+                    <path d="M316 34 C 324 50, 304 54, 298 38 C 304 30, 316 34, 316 34 Z" fill="#3D6322"/>
+                    <path d="M288 24 C 298 10, 278 4, 270 18 C 278 26, 288 24, 288 24 Z" fill="#8EB854"/>
+                    <path d="M252 25 C 260 42, 238 46, 234 28 C 242 22, 252 25, 252 25 Z" fill="#3D6322"/>
+                    <path d="M232 22 C 238 8, 220 4, 214 18 C 222 24, 232 22, 232 22 Z" fill="#5E8C38"/>
+
+                    <path d="M55 48 C 44 45, 44 56, 54 55 Z" fill="#6E9E42"/>
+                    <path d="M58 58 C 68 55, 68 66, 58 65 Z" fill="#3D6322"/>
+                    <path d="M345 48 C 356 45, 356 56, 346 55 Z" fill="#6E9E42"/>
+                    <path d="M342 58 C 332 55, 332 66, 342 65 Z" fill="#3D6322"/>
+
+                    <path d="M192 34 C 172 16, 170 46, 194 42 Z" fill="#3D6322"/>
+                    <path d="M208 34 C 228 16, 230 46, 206 42 Z" fill="#3D6322"/>
+                    <path d="M195 40 C 180 56, 196 66, 200 46 Z" fill="#6E9E42"/>
+                    <path d="M205 40 C 220 56, 204 66, 200 46 Z" fill="#6E9E42"/>
+
+                    <g transform="translate(62, 28)">
+                        <circle cx="0" cy="-6" r="5" fill="#F3B8C8"/>
+                        <circle cx="6" cy="-2" r="5" fill="#F3B8C8"/>
+                        <circle cx="4" cy="5" r="5" fill="#F3B8C8"/>
+                        <circle cx="-4" cy="5" r="5" fill="#F3B8C8"/>
+                        <circle cx="-6" cy="-2" r="5" fill="#F3B8C8"/>
+                        <circle cx="0" cy="0" r="3.5" fill="#FFF6DF"/>
+                    </g>
+                    <g transform="translate(135, 24)">
+                        <circle cx="0" cy="-4.5" r="4" fill="#FFF6DF"/>
+                        <circle cx="4.5" cy="0" r="4" fill="#FFF6DF"/>
+                        <circle cx="0" cy="4.5" r="4" fill="#FFF6DF"/>
+                        <circle cx="-4.5" cy="0" r="4" fill="#FFF6DF"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#DFC082"/>
+                    </g>
+                    <g transform="translate(200, 34)">
+                        <circle cx="0" cy="-8" r="6.5" fill="#F3B8C8"/>
+                        <circle cx="7.5" cy="-2.5" r="6.5" fill="#F3B8C8"/>
+                        <circle cx="4.8" cy="6.5" r="6.5" fill="#F3B8C8"/>
+                        <circle cx="-4.8" cy="6.5" r="6.5" fill="#F3B8C8"/>
+                        <circle cx="-7.5" cy="-2.5" r="6.5" fill="#F3B8C8"/>
+                        <circle cx="0" cy="0" r="4.5" fill="#FFF6DF"/>
+                        <circle cx="0" cy="0" r="2" fill="#98252E"/>
+                    </g>
+                    <g transform="translate(265, 24)">
+                        <circle cx="0" cy="-4.5" r="4" fill="#FFF6DF"/>
+                        <circle cx="4.5" cy="0" r="4" fill="#FFF6DF"/>
+                        <circle cx="0" cy="4.5" r="4" fill="#FFF6DF"/>
+                        <circle cx="-4.5" cy="0" r="4" fill="#FFF6DF"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#DFC082"/>
+                    </g>
+                    <g transform="translate(338, 28)">
+                        <circle cx="0" cy="-6" r="5" fill="#F3B8C8"/>
+                        <circle cx="6" cy="-2" r="5" fill="#F3B8C8"/>
+                        <circle cx="4" cy="5" r="5" fill="#F3B8C8"/>
+                        <circle cx="-4" cy="5" r="5" fill="#F3B8C8"/>
+                        <circle cx="-6" cy="-2" r="5" fill="#F3B8C8"/>
+                        <circle cx="0" cy="0" r="3.5" fill="#FFF6DF"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="reveal-item relative z-10 text-center mb-7">
+                <p class="font-serif italic text-lg text-gold-dark font-semibold block mb-2">Assalamu'alaikum Wr. Wb.</p>
+                <div class="flex items-center justify-center gap-2.5 my-2.5">
+                    <span class="h-[1px] w-10 bg-wood/40"></span>
+                    <span class="text-wax text-[10px]">✦</span>
+                    <span class="h-[1px] w-10 bg-wood/40"></span>
+                </div>
+                <p class="font-body text-xs text-espresso/90 mt-2 leading-relaxed px-1">
+                    Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami bermaksud menyelenggarakan acara pernikahan putra-putri kami:
+                </p>
+            </div>
+
+            <!-- CPW -->
+            <div class="reveal-item relative z-10 text-center aged-subcard px-5 py-6">
+                <span class="inline-block px-3.5 py-0.5 rounded-full bg-gold/15 border border-gold-dark/25 text-gold-dark font-serif italic text-xs font-semibold mb-2">
+                    Calon Pengantin Wanita
+                </span>
+                <h3 class="font-display text-[22px] sm:text-2xl text-espresso font-bold leading-snug">
+                    Farisa Addin Pangesti, S.Tr.M.
+                </h3>
+                <div class="flex items-center justify-center gap-2 my-3">
+                    <span class="w-8 h-[1px] bg-wood/35"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-wax/60"></span>
+                    <span class="w-8 h-[1px] bg-wood/35"></span>
+                </div>
+                <p class="font-serif text-[11px] font-bold text-wood uppercase tracking-[0.2em]">Putri dari</p>
+                <p class="font-body text-xs text-espresso mt-1 font-medium leading-relaxed">
+                    Bapak Muh Dlajad &amp; Ibu Almh. Sri Sunarni
+                </p>
+                <div class="mt-3.5 inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F3E5C8] border border-[#D5B882] text-xs font-serif italic text-espresso font-semibold">
+                    <svg class="w-3.5 h-3.5 text-wax inline shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Rengas Tambakboyo, Ambarawa</span>
+                </div>
+            </div>
+
+            <!-- Ampersand Ornamen Tengah -->
+            <div class="reveal-item relative z-10 flex items-center justify-center gap-3 my-5">
+                <div class="h-[1px] w-14 bg-gradient-to-r from-transparent to-wood/50"></div>
+                <div class="w-9 h-9 rounded-full bg-ivory/75 border border-wood/35 shadow-sm flex items-center justify-center">
+                    <span class="font-shire italic text-lg text-wax font-bold">&amp;</span>
+                </div>
+                <div class="h-[1px] w-14 bg-gradient-to-l from-transparent to-wood/50"></div>
+            </div>
+
+            <!-- CPP -->
+            <div class="reveal-item relative z-10 text-center aged-subcard px-5 py-6">
+                <span class="inline-block px-3.5 py-0.5 rounded-full bg-gold/15 border border-gold-dark/25 text-gold-dark font-serif italic text-xs font-semibold mb-2">
+                    Calon Pengantin Pria
+                </span>
+                <h3 class="font-display text-[22px] sm:text-2xl text-espresso font-bold leading-snug">
+                    Desin Al Esa, S.Pd.
+                </h3>
+                <div class="flex items-center justify-center gap-2 my-3">
+                    <span class="w-8 h-[1px] bg-wood/35"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-wax/60"></span>
+                    <span class="w-8 h-[1px] bg-wood/35"></span>
+                </div>
+                <p class="font-serif text-[11px] font-bold text-wood uppercase tracking-[0.2em]">Putra dari</p>
+                <p class="font-body text-xs text-espresso mt-1 font-medium leading-relaxed">
+                    Bapak Abdul Azis &amp; Ibu Titik Rusmiyati
+                </p>
+                <div class="mt-3.5 inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F3E5C8] border border-[#D5B882] text-xs font-serif italic text-espresso font-semibold">
+                    <svg class="w-3.5 h-3.5 text-wax inline shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Kalibuntu Wetan, Kendal</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: COUNTDOWN & DETAIL ACARA
+    =========================================== -->
+    <section class="relative px-5 py-8 bg-[#FFF6DF] text-center">
+        <!-- Ornamen Pembatas Antar Seksi -->
+        <div class="reveal-item flex items-center justify-center gap-3 mb-7">
+            <span class="h-[1px] w-16 bg-gradient-to-r from-transparent to-wood/35"></span>
+            <svg class="w-5 h-5 text-gold-dark" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+            </svg>
+            <span class="h-[1px] w-16 bg-gradient-to-l from-transparent to-wood/35"></span>
+        </div>
+
+        <div class="reveal-item">
+            <span class="section-badge mb-2.5">Save The Date</span>
+            <h2 class="font-shire text-2xl sm:text-3xl text-espresso font-bold tracking-tight mb-1.5">Waktu &amp; Tempat</h2>
+            <p class="font-body text-sm font-semibold tracking-[0.14em] uppercase text-wax mb-6">
+                Minggu, 29 November 2026
+            </p>
+
+            <!-- Live Countdown Timer dengan .parchment-sm yang konsisten sudutnya -->
+            <div class="grid grid-cols-4 gap-2.5 max-w-[330px] mx-auto mb-8">
+                <div class="parchment-card parchment-sm py-3.5 px-2">
+                    <span id="cd-days" class="relative z-10 font-body text-2xl text-espresso font-bold block leading-none mb-1">00</span>
+                    <span class="relative z-10 font-body text-[10px] uppercase tracking-wider text-wood font-semibold block">Hari</span>
+                </div>
+                <div class="parchment-card parchment-sm py-3.5 px-2">
+                    <span id="cd-hours" class="relative z-10 font-body text-2xl text-espresso font-bold block leading-none mb-1">00</span>
+                    <span class="relative z-10 font-body text-[10px] uppercase tracking-wider text-wood font-semibold block">Jam</span>
+                </div>
+                <div class="parchment-card parchment-sm py-3.5 px-2">
+                    <span id="cd-minutes" class="relative z-10 font-body text-2xl text-espresso font-bold block leading-none mb-1">00</span>
+                    <span class="relative z-10 font-body text-[10px] uppercase tracking-wider text-wood font-semibold block">Menit</span>
+                </div>
+                <div class="parchment-card parchment-sm py-3.5 px-2">
+                    <span id="cd-seconds" class="relative z-10 font-body text-2xl text-espresso font-bold block leading-none mb-1">00</span>
+                    <span class="relative z-10 font-body text-[10px] uppercase tracking-wider text-wood font-semibold block">Detik</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Master Card Rangkaian Acara (Akad, Resepsi, Lokasi menyatu rapi & konsisten) -->
+        <div class="reveal-item parchment-card px-6 py-8 space-y-5">
+            
+            <!-- Akad Nikah Subcard -->
+            <div class="relative z-10 aged-subcard p-5">
+                <div class="w-10 h-10 rounded-full bg-gold/15 border border-gold-dark/25 flex items-center justify-center mx-auto mb-2.5 text-gold-dark shadow-inner">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </div>
+                <h3 class="font-shire text-xl text-espresso font-bold mb-1">Akad Nikah</h3>
+                <p class="font-body text-xs uppercase tracking-[0.12em] text-wax font-semibold mb-3">
+                    Minggu, 29 November 2026
+                </p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ivory/90 border border-wood/25 text-xs font-body text-espresso font-medium shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-gold-dark shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>Pukul 07.00 WIB – Selesai</span>
+                </div>
+            </div>
+
+            <!-- Resepsi Subcard -->
+            <div class="relative z-10 aged-subcard p-5">
+                <div class="w-10 h-10 rounded-full bg-gold/15 border border-gold-dark/25 flex items-center justify-center mx-auto mb-2.5 text-gold-dark shadow-inner">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                </div>
+                <h3 class="font-shire text-xl text-espresso font-bold mb-1">Resepsi Pernikahan</h3>
+                <p class="font-body text-xs uppercase tracking-[0.12em] text-wax font-semibold mb-3">
+                    Minggu, 29 November 2026
+                </p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ivory/90 border border-wood/25 text-xs font-body text-espresso font-medium shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-gold-dark shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>Pukul 13.00 WIB – Selesai</span>
+                </div>
+            </div>
+
+            <!-- Lokasi & Google Maps Subcard -->
+            <div class="relative z-10 aged-subcard p-5">
+                <span class="font-serif uppercase tracking-[0.22em] text-[11px] text-gold-dark font-bold block mb-1">Lokasi Acara</span>
+                <h4 class="font-shire text-lg text-espresso font-bold">Kediaman Mempelai Wanita</h4>
+                <div class="w-12 h-[1px] bg-wood/30 mx-auto my-2.5"></div>
+                <p class="font-body text-xs text-charcoal/90 leading-relaxed font-medium">
+                    Rengas RT 02 RW 06 Tambakboyo, Ambarawa,<br>Kab. Semarang, Jawa Tengah
+                </p>
+
+                <a href="https://maps.app.goo.gl/byVZiYzwsWMbd8mX7" target="_blank" rel="noopener noreferrer" class="wax-seal-btn mt-4 inline-flex items-center justify-center gap-2 text-ivory font-serif uppercase tracking-[0.18em] text-xs font-bold px-6 py-3 rounded-full w-full">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Petunjuk Google Maps</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: AMPLOP DIGITAL (FARISA ADDIN PANGESTI)
+    =========================================== -->
+    <section class="relative px-5 py-8 bg-[#FFF6DF] text-center">
+        <!-- Ornamen Pembatas Antar Seksi -->
+        <div class="reveal-item flex items-center justify-center gap-3 mb-7">
+            <span class="h-[1px] w-16 bg-gradient-to-r from-transparent to-wood/35"></span>
+            <svg class="w-5 h-5 text-gold-dark" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+            </svg>
+            <span class="h-[1px] w-16 bg-gradient-to-l from-transparent to-wood/35"></span>
+        </div>
+
+        <div class="reveal-item">
+            <span class="section-badge mb-2.5">Wedding Gift</span>
+            <h2 class="font-shire text-2xl sm:text-3xl text-espresso font-bold tracking-tight mb-2.5">Amplop Digital</h2>
+            <p class="font-body text-xs text-charcoal/85 leading-relaxed mb-6 max-w-xs mx-auto px-1">
+                Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat mengirimkan tanda kasih secara <em>cashless</em> melalui:
+            </p>
+
+            <div class="parchment-card text-espresso p-6 text-left">
+                <div class="relative z-10 aged-subcard p-5">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-wood/20">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-full wax-seal-btn flex items-center justify-center text-ivory font-shire text-xs font-bold shrink-0">
+                                RD
+                            </div>
+                            <div>
+                                <p class="font-serif uppercase tracking-[0.18em] text-[10px] text-wood font-bold leading-none">Bank Transfer</p>
+                                <p class="font-body text-xs text-espresso font-semibold mt-0.5">Bank Central Asia</p>
+                            </div>
+                        </div>
+                        <span class="font-display italic font-bold text-xl tracking-wider text-wax">BCA</span>
+                    </div>
+
+                    <div class="my-4 text-center py-2.5 px-3 rounded-xl bg-ivory/75 border border-wood/20">
+                        <p class="font-serif uppercase tracking-[0.22em] text-[10px] text-wood font-bold mb-1">Nomor Rekening</p>
+                        <p id="rekening-number" class="font-body text-2xl tracking-[0.16em] text-espresso font-bold select-all">
+                            8031073952
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-1">
+                        <div>
+                            <p class="font-serif uppercase tracking-[0.15em] text-[10px] text-wood font-bold">Atas Nama</p>
+                            <p class="font-body text-xs text-espresso font-semibold mt-0.5">Farisa Addin Pangesti</p>
+                        </div>
+
+                        <button id="btn-copy-rekening" onclick="copyAccountNumber('8031073952')" class="wax-seal-btn text-ivory font-serif uppercase tracking-[0.15em] text-[11px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 transition-all cursor-pointer">
+                            <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                            </svg>
+                            <span id="copy-label">Salin Rekening</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="copy-toast" class="mt-3 opacity-0 transition-opacity duration-300 text-xs font-serif text-wax font-bold">
+                ✓ Nomor rekening 8031073952 berhasil disalin!
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: PENUTUP
+    =========================================== -->
+    <footer class="relative px-5 pt-6 pb-16 bg-[#FFF6DF] text-espresso text-center">
+        <div class="reveal-item parchment-card px-6 py-8">
+            <div class="relative z-10 aged-subcard px-5 py-6">
+                <svg class="w-10 h-10 text-gold-dark mx-auto mb-3 opacity-85" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 10C27 19 20 24 11 28C20 32 27 37 32 54C37 37 44 32 53 28C44 24 37 19 32 10Z" stroke="currentColor" stroke-width="1.5" fill="rgba(94,140,56,0.12)"/>
+                    <circle cx="32" cy="30" r="3" fill="#98252E"/>
+                </svg>
+
+                <p class="font-body text-xs text-espresso/90 leading-relaxed mb-4">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+                </p>
+                <p class="font-serif italic text-sm text-gold-dark font-bold mb-5">
+                    Wassalamu'alaikum Warahmatullahi Wabarakatuh
+                </p>
+
+                <div class="flex items-center justify-center gap-2.5 my-4">
+                    <span class="h-[1px] w-10 bg-wood/30"></span>
+                    <span class="text-wax text-[10px]">✦</span>
+                    <span class="h-[1px] w-10 bg-wood/30"></span>
+                </div>
+
+                <p class="font-serif uppercase tracking-[0.22em] text-[10px] text-wood font-bold mb-1">Kami yang berbahagia,</p>
+                <h2 class="font-shire text-3xl text-espresso font-bold mb-1.5">Risa &amp; Desin</h2>
+                <p class="font-body text-[11px] text-charcoal/80">Beserta Keluarga Besar Kedua Mempelai</p>
+
+                <div class="mt-5 pt-3 border-t border-wood/20">
+                    <p class="font-body text-[11px] tracking-[0.16em] uppercase text-wood font-semibold">
+                        29 . 11 . 2026 — Ambarawa &amp; Kendal
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+<!-- ==========================================
+     JAVASCRIPT ENGINE
+=========================================== -->
+<script>
+    const SEQUENCE_CONFIG = {
+        folderPath: 'frames/',
+        prefix: 'notext',
+        extension: 'webp',
+        padDigits: 3,
+        totalFrames: 664,
+        lastFrameIndex: 663,
+        maxConcurrentLoads: 8,
+        // Berapa frame awal (0, 1, 2, ... berurutan) yang wajib dimuat sebelum tombol bisa ditekan
+        startFrames: 270,
+        // Frame setelahnya dimuat di belakang layar: "kerangka" tiap frame ke-8 dulu, celahnya diisi belakangan
+        keyframeStep: 8,
+        // false = tombol aktif setelah 270 frame awal saja
+        // true  = tombol menunggu 270 frame awal + kerangka sisa animasi (lebih aman kalau tamu scroll sangat cepat)
+        waitForKeyframes: false,
+        canvasWidth: 720,
+        canvasHeight: 1280,
+        inertiaFactor: 0.10,
+        maxFrameStepPerTick: 4.5
+    };
+
+    const frames = new Array(SEQUENCE_CONFIG.totalFrames);
+    const frameStatus = new Array(SEQUENCE_CONFIG.totalFrames).fill('unloaded');
+    let currentFrameIndex = 0;
+    let currentFrameFloat = 0;
+    let targetFrameIndex = 0;
+    let rafId = null;
+
+    let hasAutoScrolledToFirstCard = false;
+    let isAutoTransitioningToCard = false;
+    let isCanvasFinishedAndUnlocked = false;
+    let settleAfterLastFrameTimer = null;
+    let lastScrollY = 0;
+    let scrollDirection = 'down';
+
+    const canvas = document.getElementById('sequence-canvas');
+    // alpha:false = kanvas tidak transparan, browser bisa menggambar lebih cepat
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const canvasStickyBox = document.getElementById('canvas-sticky-box');
+    const scrollTrack = document.getElementById('scroll-animation-track');
+    const firstCardSection = document.getElementById('first-card-section');
+    const keepSwipeHint = document.getElementById('keep-swipe-hint');
+
+    // Sinkronisasi resolusi internal Canvas dengan ukuran layar HP aktual agar tidak distorsi / zoom oleh CSS
+    // Ukuran layar terakhir yang dipakai kanvas
+    let lastSyncedW = 0;
+    let lastSyncedH = 0;
+
+    function syncCanvasViewportSize() {
+        if (!canvas || !canvasStickyBox) return;
+        const rect = canvasStickyBox.getBoundingClientRect();
+        const cssW = Math.max(1, rect.width || window.innerWidth);
+        const cssH = Math.max(1, rect.height || window.innerHeight);
+
+        // Abaikan perubahan tinggi kecil saat lebar tetap (address bar / toolbar browser
+        // muncul-hilang, termasuk di browser bawaan WhatsApp/Instagram).
+        // Kanvas hanya diatur ulang saat pertama kali, saat HP diputar, atau saat ukuran berubah besar.
+        if (lastSyncedW !== 0) {
+            const sameWidth = Math.abs(cssW - lastSyncedW) < 2;
+            const smallHeightChange = Math.abs(cssH - lastSyncedH) < lastSyncedH * 0.2;
+            if (sameWidth && smallHeightChange) return;
+        }
+        lastSyncedW = cssW;
+        lastSyncedH = cssH;
+
+        // Gunakan basis lebar 720px (sama dengan lebar gambar) dan sesuaikan tinggi internal kanvas persis dengan rasio viewport HP
+        const viewportAspect = cssW / cssH;
+        SEQUENCE_CONFIG.canvasWidth = 720;
+        SEQUENCE_CONFIG.canvasHeight = Math.round(720 / viewportAspect);
+
+        if (canvas.width !== SEQUENCE_CONFIG.canvasWidth || canvas.height !== SEQUENCE_CONFIG.canvasHeight) {
+            canvas.width = SEQUENCE_CONFIG.canvasWidth;
+            canvas.height = SEQUENCE_CONFIG.canvasHeight;
+            renderCanvasFrame(currentFrameIndex);
+        }
+    }
+
+    let idleSwipeTimer = null;
+    let isInvitationOpened = false;
+    let currentAnimationProgress = 0;
+
+    // Penanda agar class hint tidak diubah berulang-ulang di setiap event scroll/touch
+    let isKeepSwipeHintVisible = false;
+
+    function hideKeepSwipeHint() {
+        if (!keepSwipeHint || !isKeepSwipeHintVisible) return;
+        isKeepSwipeHintVisible = false;
+        keepSwipeHint.classList.add('opacity-0', 'translate-y-2');
+        keepSwipeHint.classList.remove('opacity-100', 'translate-y-0');
+    }
+
+    function showKeepSwipeHint() {
+        if (!keepSwipeHint || isKeepSwipeHintVisible) return;
+        if (isInvitationOpened && !isAutoScrolling && !isAutoTransitioningToCard && currentFrameIndex < SEQUENCE_CONFIG.lastFrameIndex) {
+            isKeepSwipeHintVisible = true;
+            keepSwipeHint.classList.remove('opacity-0', 'translate-y-2');
+            keepSwipeHint.classList.add('opacity-100', 'translate-y-0');
+        }
+    }
+
+    function resetIdleSwipeTimer() {
+        hideKeepSwipeHint();
+        if (idleSwipeTimer) clearTimeout(idleSwipeTimer);
+        if (!isInvitationOpened || isAutoScrolling || isAutoTransitioningToCard || currentFrameIndex >= SEQUENCE_CONFIG.lastFrameIndex) return;
+
+        idleSwipeTimer = setTimeout(() => {
+            showKeepSwipeHint();
+        }, 2000);
+    }
+
+    function getFrameFileName(index) {
+        const paddedNumber = String(index).padStart(SEQUENCE_CONFIG.padDigits, '0');
+        return `${SEQUENCE_CONFIG.folderPath}${SEQUENCE_CONFIG.prefix}${paddedNumber}.${SEQUENCE_CONFIG.extension}`;
+    }
+
+    function loadSingleFrame(index, onDone) {
+        if (index < 0 || index >= SEQUENCE_CONFIG.totalFrames) return;
+        if (frameStatus[index] === 'loaded' || frameStatus[index] === 'loading') {
+            if (onDone) onDone();
+            return;
+        }
+
+        frameStatus[index] = 'loading';
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = getFrameFileName(index);
+
+        img.onload = () => {
+            frames[index] = img;
+            frameStatus[index] = 'loaded';
+            if (index === currentFrameIndex) renderCanvasFrame(currentFrameIndex);
+            markFrameSettled(index);
+            if (onDone) onDone();
+        };
+
+        img.onerror = () => {
+            frameStatus[index] = 'error';
+            if (index === currentFrameIndex) renderCanvasFrame(currentFrameIndex);
+            markFrameSettled(index);
+            if (onDone) onDone();
+        };
+    }
+
+    // Urutan muat gambar:
+    // 1) 270 frame awal berurutan (0 - 269)  -> tombol "Buka Undangan" aktif setelah ini
+    // 2) frame terakhir, lalu "kerangka" tiap 16 dan tiap 8 frame dari sisa animasi
+    // 3) sisanya (tiap 4, 2, 1) mengisi celah di belakang layar.
+    // Total tetap 664 frame; kecepatan animasi tetap mengikuti scroll (tidak dikunci).
+    const isEssentialFrame = new Uint8Array(SEQUENCE_CONFIG.totalFrames);
+    const frameLoadOrder = buildFrameLoadOrder();
+    const essentialTotal = isEssentialFrame.reduce((a, b) => a + b, 0);
+
+    function buildFrameLoadOrder() {
+        const total = SEQUENCE_CONFIG.totalFrames;
+        const order = [];
+        const added = new Uint8Array(total);
+        const add = (i, essential) => {
+            if (i < 0 || i >= total || added[i]) return;
+            added[i] = 1;
+            if (essential) isEssentialFrame[i] = 1;
+            order.push(i);
+        };
+
+        const start = Math.min(total, SEQUENCE_CONFIG.startFrames);
+        const kf = SEQUENCE_CONFIG.waitForKeyframes;
+
+        for (let i = 0; i < start; i++) add(i, true);
+        add(SEQUENCE_CONFIG.lastFrameIndex, kf);
+        for (const step of [SEQUENCE_CONFIG.keyframeStep * 2, SEQUENCE_CONFIG.keyframeStep]) {
+            for (let i = start; i < total; i += step) add(i, kf);
+        }
+        for (const step of [4, 2, 1]) {
+            for (let i = start; i < total; i += step) add(i, false);
+        }
+        return order;
+    }
+
+    // Progress dihitung dari frame "wajib" saja, supaya undangan cepat bisa dibuka
+    let settledFrameCount = 0;
+    let settledEssentialCount = 0;
+    let isAllFramesReady = false;
+
+    function markFrameSettled(index) {
+        settledFrameCount++;
+        if (isEssentialFrame[index]) settledEssentialCount++;
+        updatePreloadProgressUI();
+    }
+
+    // Elemen progress disimpan sekali saja (tidak dicari ulang 664 kali)
+    const preloadBar = document.getElementById('preload-bar');
+    const preloadPercent = document.getElementById('preload-percent');
+    const preloadText = document.getElementById('preload-text');
+    const preloadContainer = document.getElementById('preload-container');
+    const btnOpen = document.getElementById('btn-open-invitation');
+    let lastShownPercent = -1;
+
+    function updatePreloadProgressUI() {
+        const total = essentialTotal;
+        const pct = Math.min(100, Math.floor((settledEssentialCount / total) * 100));
+
+        // Hanya ubah tampilan jika angka persennya benar-benar berubah
+        if (pct !== lastShownPercent) {
+            lastShownPercent = pct;
+            if (preloadBar) preloadBar.style.width = `${pct}%`;
+            if (preloadPercent) preloadPercent.textContent = `${pct}%`;
+        }
+
+        if (!isAllFramesReady && settledEssentialCount >= total) {
+            isAllFramesReady = true;
+            if (preloadText) preloadText.textContent = 'Undangan Siap Dibuka';
+            if (btnOpen) btnOpen.disabled = false;
+            setTimeout(() => {
+                if (preloadContainer) preloadContainer.style.opacity = '0.45';
+            }, 400);
+        }
+    }
+
+    // Muat semua frame mengikuti frameLoadOrder, dengan beberapa unduhan berjalan bersamaan.
+    // Frame yang belum termuat saat di-scroll akan diganti sementara oleh frame terdekat sebelumnya.
+    function initProgressivePreload() {
+        let nextPos = 0;
+
+        function spawnWorker() {
+            if (nextPos >= frameLoadOrder.length) return;
+            const idx = frameLoadOrder[nextPos++];
+            loadSingleFrame(idx, spawnWorker);
+        }
+
+        for (let w = 0; w < SEQUENCE_CONFIG.maxConcurrentLoads; w++) {
+            spawnWorker();
+        }
+    }
+
+    let autoCardRafId = null;
+
+    function cancelPendingCardAutoScroll() {
+        if (settleAfterLastFrameTimer) {
+            clearTimeout(settleAfterLastFrameTimer);
+            settleAfterLastFrameTimer = null;
+        }
+    }
+
+    function scheduleAutoScrollWhenSettled() {
+        if (hasAutoScrolledToFirstCard || isAutoTransitioningToCard || !firstCardSection) return;
+        if (scrollDirection !== 'down') return;
+
+        if (currentFrameIndex !== SEQUENCE_CONFIG.lastFrameIndex || targetFrameIndex !== SEQUENCE_CONFIG.lastFrameIndex || rafId !== null) {
+            return;
+        }
+
+        cancelPendingCardAutoScroll();
+
+        settleAfterLastFrameTimer = setTimeout(() => {
+            settleAfterLastFrameTimer = null;
+            if (
+                !hasAutoScrolledToFirstCard &&
+                !isAutoTransitioningToCard &&
+                currentFrameIndex === SEQUENCE_CONFIG.lastFrameIndex &&
+                targetFrameIndex === SEQUENCE_CONFIG.lastFrameIndex &&
+                rafId === null
+            ) {
+                triggerAutoScrollToFirstCard();
+            }
+        }, 250);
+    }
+
+    function triggerAutoScrollToFirstCard() {
+        if (hasAutoScrolledToFirstCard || isAutoTransitioningToCard || !firstCardSection) return;
+
+        hasAutoScrolledToFirstCard = true;
+        isAutoTransitioningToCard = true;
+        isCanvasFinishedAndUnlocked = true;
+        hideKeepSwipeHint();
+
+        renderCanvasFrame(SEQUENCE_CONFIG.lastFrameIndex);
+
+        const startY = window.scrollY;
+        const targetRect = firstCardSection.getBoundingClientRect();
+        const targetY = startY + targetRect.top - 16;
+        const distance = targetY - startY;
+
+        if (distance <= 4) {
+            isAutoTransitioningToCard = false;
+            return;
+        }
+
+        const duration = 2400;
+        const startTime = performance.now();
+
+        const cancelOnUserReverse = () => {
+            if (autoCardRafId) {
+                cancelAnimationFrame(autoCardRafId);
+                autoCardRafId = null;
+            }
+            isAutoTransitioningToCard = false;
+            window.removeEventListener('wheel', cancelOnUserReverse);
+            window.removeEventListener('touchstart', cancelOnUserReverse);
+        };
+
+        window.addEventListener('wheel', cancelOnUserReverse, { once: true, passive: true });
+        window.addEventListener('touchstart', cancelOnUserReverse, { once: true, passive: true });
+
+        function stepScroll(now) {
+            if (!isAutoTransitioningToCard) return;
+
+            const elapsed = now - startTime;
+            const t = Math.min(1, elapsed / duration);
+            const gentleSineEase = 0.5 * (1 - Math.cos(Math.PI * t));
+
+            window.scrollTo(0, startY + distance * gentleSineEase);
+
+            if (t < 1) {
+                autoCardRafId = requestAnimationFrame(stepScroll);
+            } else {
+                isAutoTransitioningToCard = false;
+                autoCardRafId = null;
+                window.removeEventListener('wheel', cancelOnUserReverse);
+                window.removeEventListener('touchstart', cancelOnUserReverse);
+            }
+        }
+
+        autoCardRafId = requestAnimationFrame(stepScroll);
+    }
+
+    // Tinggi kotak kanvas (tetap, tidak ikut berubah saat address bar iOS muncul/hilang).
+    // Dipakai menggantikan window.innerHeight supaya perhitungan frame tidak "loncat".
+    function getStickyHeight() {
+        return (canvasStickyBox && canvasStickyBox.offsetHeight) || window.innerHeight;
+    }
+
+    function getMaxCanvasScrollY() {
+        if (!scrollTrack) return 0;
+        return Math.max(0, scrollTrack.offsetTop + scrollTrack.offsetHeight - getStickyHeight());
+    }
+
+    function updateScrollScrubbing() {
+        if (!scrollTrack) return;
+
+        const maxCanvasScrollY = getMaxCanvasScrollY();
+
+        // GATEKEEPER: Jika pengguna swipe terlalu kencang hingga melewati batas bawah track kanvas
+        // padahal animasi inertia kanvas belum selesai menampilkan notext663.webp (frame 663),
+        // tahan posisi scroll tepat di ujung kanvas agar card pertama tidak ikut terhempas ke atas.
+        if (!isCanvasFinishedAndUnlocked && window.scrollY > maxCanvasScrollY) {
+            window.scrollTo(0, maxCanvasScrollY);
+        }
+
+        const currentScrollY = window.scrollY;
+        if (!isAutoTransitioningToCard) {
+            scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
+            cancelPendingCardAutoScroll();
+        }
+        lastScrollY = currentScrollY;
+
+        const rect = scrollTrack.getBoundingClientRect();
+        const scrollableDistance = Math.max(1, rect.height - getStickyHeight());
+        const scrolled = -rect.top;
+
+        const rawProgress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+        currentAnimationProgress = rawProgress;
+
+        // Jika pengguna scroll balik ke atas (sebelum 85% track), kunci kembali gatekeeper & aktifkan lagi auto-scroll
+        if (!isAutoTransitioningToCard && rawProgress < 0.85) {
+            hasAutoScrolledToFirstCard = false;
+            isCanvasFinishedAndUnlocked = false;
+        }
+
+        if (isAutoTransitioningToCard) {
+            targetFrameIndex = SEQUENCE_CONFIG.lastFrameIndex;
+        } else {
+            const mappedProgress = Math.min(1, rawProgress / 0.96);
+            targetFrameIndex = Math.min(
+                SEQUENCE_CONFIG.lastFrameIndex,
+                Math.round(mappedProgress * SEQUENCE_CONFIG.lastFrameIndex)
+            );
+        }
+
+        resetIdleSwipeTimer();
+
+        for (let lookahead = 0; lookahead <= 16; lookahead++) {
+            const idx = targetFrameIndex + lookahead;
+            if (idx <= SEQUENCE_CONFIG.lastFrameIndex && frameStatus[idx] === 'unloaded') {
+                loadSingleFrame(idx);
+            }
+        }
+
+        if (!rafId) {
+            rafId = requestAnimationFrame(smoothFrameLoop);
+        }
+    }
+
+    function smoothFrameLoop() {
+        const diff = targetFrameIndex - currentFrameFloat;
+
+        // Selama inertia kanvas masih berjalan mengejar frame 663, pastikan layar tidak kebablasan ke card
+        if (!isCanvasFinishedAndUnlocked && scrollTrack) {
+            const maxCanvasScrollY = getMaxCanvasScrollY();
+            if (window.scrollY > maxCanvasScrollY) {
+                window.scrollTo(0, maxCanvasScrollY);
+            }
+        }
+
+        if (Math.abs(diff) > 0.05) {
+            const dampedStep = diff * SEQUENCE_CONFIG.inertiaFactor;
+            const minStep = Math.min(Math.abs(diff), 0.25);
+            const rawStep = Math.abs(dampedStep) < minStep
+                ? Math.sign(diff) * minStep
+                : dampedStep;
+
+            const clampedStep = Math.sign(rawStep) * Math.min(Math.abs(rawStep), SEQUENCE_CONFIG.maxFrameStepPerTick);
+
+            currentFrameFloat += clampedStep;
+            const nextIntFrame = Math.max(0, Math.min(SEQUENCE_CONFIG.lastFrameIndex, Math.round(currentFrameFloat)));
+
+            if (nextIntFrame !== currentFrameIndex) {
+                currentFrameIndex = nextIntFrame;
+                renderCanvasFrame(currentFrameIndex);
+            }
+
+            rafId = requestAnimationFrame(smoothFrameLoop);
+        } else {
+            currentFrameFloat = targetFrameIndex;
+            if (currentFrameIndex !== targetFrameIndex) {
+                currentFrameIndex = targetFrameIndex;
+                renderCanvasFrame(currentFrameIndex);
+            }
+
+            rafId = null;
+
+            // Begitu frame 663 (notext663.webp) benar-benar tercapai dan inertia kanvas berhenti total:
+            // buka kunci gatekeeper dan jalankan auto-scroll mulus ke card pertama
+            if (currentFrameIndex === SEQUENCE_CONFIG.lastFrameIndex) {
+                isCanvasFinishedAndUnlocked = true;
+                if (scrollDirection === 'down') {
+                    scheduleAutoScrollWhenSettled();
+                }
+            }
+        }
+    }
+
+    function renderCanvasFrame(frameIndex) {
+        if (!ctx) return;
+
+        const cw = SEQUENCE_CONFIG.canvasWidth;
+        const ch = SEQUENCE_CONFIG.canvasHeight;
+
+        // Pakai frame yang diminta; jika belum ada, pakai frame terdekat sebelumnya yang sudah termuat
+        let imgToDraw = null;
+        for (let i = frameIndex; i >= 0; i--) {
+            if (frameStatus[i] === 'loaded' && frames[i]) {
+                imgToDraw = frames[i];
+                break;
+            }
+        }
+
+        if (!imgToDraw) {
+            // Belum ada gambar sama sekali: tampilkan latar krem kertas (#FFF6DF)
+            ctx.fillStyle = '#FFF6DF';
+            ctx.fillRect(0, 0, cw, ch);
+            return;
+        }
+
+        const iw = imgToDraw.naturalWidth || 720;
+        const ih = imgToDraw.naturalHeight || 1280;
+        const canvasAspect = cw / ch;
+        const imageAspect = iw / ih;
+
+        let sx = 0, sy = 0, sw = iw, sh = ih;
+
+        if (canvasAspect < imageAspect) {
+            // Layar HP lebih memanjang (misal 19.5:9 atau 20:9 dibanding gambar 9:16):
+            // Mode "cover" penuh: potong tepi kiri & kanan seimbang tanpa batas,
+            // agar gambar selalu nempel kiri-kanan & atas-bawah tanpa gepeng
+            sw = ih * canvasAspect;
+            sx = (iw - sw) * 0.5;
+        } else if (canvasAspect > imageAspect) {
+            // Layar lebih lebar dari 9:16:
+            // Mode "cover" penuh: potong bagian atas & bawah dengan titik fokus agak ke bawah (0.55)
+            sh = iw / canvasAspect;
+            sy = (ih - sh) * 0.55;
+        }
+
+        // Gambar selalu menutup seluruh kanvas, jadi latar tidak perlu dicat ulang tiap frame
+        ctx.drawImage(imgToDraw, sx, sy, sw, sh, 0, 0, cw, ch);
+    }
+
+    let isAudioPlaying = false;
+    let isAutoScrolling = false;
+    let autoScrollRaf = null;
+    let lastAutoScrollTime = null;
+    let autoScrollSubPixelAccumulator = 0;
+
+    function openInvitation() {
+        if (!isAllFramesReady) return;
+        const coverGate = document.getElementById('cover-gate');
+        const floatingControls = document.getElementById('floating-controls');
+
+        document.body.classList.remove('locked');
+        isInvitationOpened = true;
+        resetIdleSwipeTimer();
+
+        if (coverGate) {
+            coverGate.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                coverGate.style.display = 'none';
+            }, 1000);
+        }
+
+        if (floatingControls) {
+            floatingControls.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        const audio = document.getElementById('bg-music');
+        if (audio) {
+            audio.play().then(() => {
+                isAudioPlaying = true;
+                updateAudioButtonUI();
+            }).catch(() => {
+                isAudioPlaying = false;
+                updateAudioButtonUI();
+            });
+        }
+    }
+
+    function toggleAudio() {
+        const audio = document.getElementById('bg-music');
+        if (!audio) return;
+
+        if (isAudioPlaying) {
+            audio.pause();
+            isAudioPlaying = false;
+        } else {
+            audio.play().catch(() => {});
+            isAudioPlaying = true;
+        }
+        updateAudioButtonUI();
+    }
+
+    function updateAudioButtonUI() {
+        const iconOn = document.getElementById('icon-audio-on');
+        const iconOff = document.getElementById('icon-audio-off');
+        if (!iconOn || !iconOff) return;
+
+        if (isAudioPlaying) {
+            iconOn.classList.remove('hidden');
+            iconOff.classList.add('hidden');
+        } else {
+            iconOn.classList.add('hidden');
+            iconOff.classList.remove('hidden');
+        }
+    }
+
+    function toggleAutoScroll() {
+        isAutoScrolling = !isAutoScrolling;
+        const playIcon = document.getElementById('icon-autoscroll-play');
+        const pauseIcon = document.getElementById('icon-autoscroll-pause');
+
+        if (isAutoScrolling) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            hideKeepSwipeHint();
+            lastAutoScrollTime = null;
+            autoScrollSubPixelAccumulator = 0;
+            autoScrollRaf = requestAnimationFrame(runAutoScrollStep);
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
+            lastAutoScrollTime = null;
+            resetIdleSwipeTimer();
+        }
+    }
+
+    function runAutoScrollStep(now) {
+        if (!isAutoScrolling) return;
+
+        if (lastAutoScrollTime === null) {
+            lastAutoScrollTime = now;
+            autoScrollRaf = requestAnimationFrame(runAutoScrollStep);
+            return;
+        }
+
+        const dt = (now - lastAutoScrollTime) / 1000;
+        lastAutoScrollTime = now;
+
+        if (scrollTrack && currentAnimationProgress < 0.96 && currentFrameIndex < SEQUENCE_CONFIG.lastFrameIndex) {
+            const scrollableDistance = Math.max(1, scrollTrack.offsetHeight - getStickyHeight());
+            const effectiveAnimDistance = scrollableDistance * 0.96;
+            const pixelsPerCanvasFrame = effectiveAnimDistance / SEQUENCE_CONFIG.lastFrameIndex;
+            const targetFps = 18;
+
+            autoScrollSubPixelAccumulator += pixelsPerCanvasFrame * targetFps * dt;
+            const wholePixels = Math.floor(autoScrollSubPixelAccumulator);
+
+            if (wholePixels >= 1) {
+                window.scrollBy(0, wholePixels);
+                autoScrollSubPixelAccumulator -= wholePixels;
+            }
+        } else {
+            autoScrollSubPixelAccumulator += 75 * dt;
+            const wholePixels = Math.floor(autoScrollSubPixelAccumulator);
+            if (wholePixels >= 1) {
+                window.scrollBy(0, wholePixels);
+                autoScrollSubPixelAccumulator -= wholePixels;
+            }
+        }
+
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+            toggleAutoScroll();
+            return;
+        }
+        autoScrollRaf = requestAnimationFrame(runAutoScrollStep);
+    }
+
+    function initCountdown() {
+        const targetDate = new Date('2026-11-29T07:00:00+07:00').getTime();
+        // Elemen countdown disimpan sekali, tidak dicari ulang setiap detik
+        const elDays = document.getElementById('cd-days');
+        const elHours = document.getElementById('cd-hours');
+        const elMinutes = document.getElementById('cd-minutes');
+        const elSeconds = document.getElementById('cd-seconds');
+        let timerId = null;
+
+        function updateTimer() {
+            const diff = Math.max(0, targetDate - Date.now());
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            if (elDays) elDays.textContent = String(days).padStart(2, '0');
+            if (elHours) elHours.textContent = String(hours).padStart(2, '0');
+            if (elMinutes) elMinutes.textContent = String(minutes).padStart(2, '0');
+            if (elSeconds) elSeconds.textContent = String(seconds).padStart(2, '0');
+
+            // Hari H sudah tiba: hentikan timer, tidak perlu jalan terus
+            if (diff === 0 && timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        }
+
+        updateTimer();
+        if (targetDate > Date.now()) timerId = setInterval(updateTimer, 1000);
+    }
+
+    let copyResetTimer = null;
+
+    function copyWithFallback(text) {
+        // Cara lama (cadangan) untuk browser yang tidak mendukung Clipboard API
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'fixed';
+        tempInput.style.top = '0';
+        tempInput.style.left = '0';
+        tempInput.style.opacity = '0';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(tempInput);
+    }
+
+    function copyAccountNumber(numberText) {
+        const copyLabel = document.getElementById('copy-label');
+        const copyToast = document.getElementById('copy-toast');
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(numberText).catch(() => copyWithFallback(numberText));
+        } else {
+            copyWithFallback(numberText);
+        }
+
+        if (copyLabel) copyLabel.textContent = 'Tersalin!';
+        if (copyToast) copyToast.classList.remove('opacity-0');
+
+        // Jika tombol ditekan berkali-kali, timer lama dibatalkan agar tulisan tidak berkedip
+        if (copyResetTimer) clearTimeout(copyResetTimer);
+        copyResetTimer = setTimeout(() => {
+            if (copyLabel) copyLabel.textContent = 'Salin Rekening';
+            if (copyToast) copyToast.classList.add('opacity-0');
+            copyResetTimer = null;
+        }, 2800);
+    }
+
+    function initRevealObserver() {
+        const items = document.querySelectorAll('.reveal-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Sudah muncul: berhenti dipantau agar browser tidak bekerja sia-sia
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        items.forEach(item => observer.observe(item));
+    }
+
+    // Ukuran kanvas disesuaikan maksimal sekali per frame layar,
+    // karena di HP event resize bisa muncul beruntun saat address bar muncul/hilang
+    let resizeRafId = null;
+    function scheduleCanvasResize() {
+        if (resizeRafId) return;
+        resizeRafId = requestAnimationFrame(() => {
+            resizeRafId = null;
+            syncCanvasViewportSize();
+        });
+    }
+
+    window.addEventListener('scroll', updateScrollScrubbing, { passive: true });
+    window.addEventListener('resize', scheduleCanvasResize, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(scheduleCanvasResize, 150), { passive: true });
+    window.addEventListener('touchstart', resetIdleSwipeTimer, { passive: true });
+    window.addEventListener('touchmove', resetIdleSwipeTimer, { passive: true });
+    window.addEventListener('wheel', resetIdleSwipeTimer, { passive: true });
+    window.addEventListener('DOMContentLoaded', () => {
+        syncCanvasViewportSize();
+        renderCanvasFrame(0);
+        initProgressivePreload();
+        initCountdown();
+        initRevealObserver();
+    });
+</script>
+</body>
+</html>
