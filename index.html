@@ -370,7 +370,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>
                 </svg>
                 <div class="px-4 py-1.5 rounded-full bg-espresso/65 backdrop-blur-sm border border-gold/35 text-ivory text-[11px] font-serif tracking-[0.22em] uppercase shadow-lg">
-                    <span>Keep Swipe</span>
+                    <span id="keep-swipe-text">Keep Swipe</span>
                 </div>
             </div>
         </div>
@@ -836,6 +836,7 @@
         isKeepSwipeHintVisible = false;
         keepSwipeHint.classList.add('opacity-0', 'translate-y-2');
         keepSwipeHint.classList.remove('opacity-100', 'translate-y-0');
+        stopKeepSwipeTextCycle();
     }
 
     function showKeepSwipeHint() {
@@ -844,7 +845,44 @@
             isKeepSwipeHintVisible = true;
             keepSwipeHint.classList.remove('opacity-0', 'translate-y-2');
             keepSwipeHint.classList.add('opacity-100', 'translate-y-0');
+            startKeepSwipeTextCycle();
         }
+    }
+
+    // Teks hint berganti bahasa tiap 0,5 detik: Inggris, Indonesia, Jawa, Arab
+    const KEEP_SWIPE_TEXTS = [
+        { text: 'Keep Swipe', lang: 'en', dir: 'ltr' },
+        { text: 'Terus Geser', lang: 'id', dir: 'ltr' },
+        { text: 'Geseren Terus', lang: 'jv', dir: 'ltr' },
+        { text: 'استمر بالسحب', lang: 'ar', dir: 'rtl' }
+    ];
+    const keepSwipeText = document.getElementById('keep-swipe-text');
+    let keepSwipeTextTimer = null;
+    let keepSwipeTextIndex = 0;
+
+    function applyKeepSwipeText(index) {
+        if (!keepSwipeText) return;
+        const item = KEEP_SWIPE_TEXTS[index];
+        keepSwipeText.textContent = item.text;
+        keepSwipeText.lang = item.lang;
+        keepSwipeText.dir = item.dir;
+        // Huruf Arab harus menyambung, jadi letter-spacing dimatikan
+        keepSwipeText.style.letterSpacing = item.lang === 'ar' ? 'normal' : '';
+    }
+
+    function startKeepSwipeTextCycle() {
+        stopKeepSwipeTextCycle();
+        keepSwipeTextIndex = 0;
+        applyKeepSwipeText(keepSwipeTextIndex);
+        keepSwipeTextTimer = setInterval(() => {
+            keepSwipeTextIndex = (keepSwipeTextIndex + 1) % KEEP_SWIPE_TEXTS.length;
+            applyKeepSwipeText(keepSwipeTextIndex);
+        }, 500);
+    }
+
+    function stopKeepSwipeTextCycle() {
+        if (keepSwipeTextTimer) clearInterval(keepSwipeTextTimer);
+        keepSwipeTextTimer = null;
     }
 
     function resetIdleSwipeTimer() {
@@ -854,7 +892,7 @@
 
         idleSwipeTimer = setTimeout(() => {
             showKeepSwipeHint();
-        }, 2000);
+        }, 1000);
     }
 
     function getFrameFileName(index) {
